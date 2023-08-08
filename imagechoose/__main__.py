@@ -27,7 +27,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fileBrowser.imageChooseList.display.itemSelectionChanged.connect(
             self.onImageChooseListClicked
         )
-        self.handleImageChooseBrowserKeyPressed()
+        self.initHandleImageChooseBrowserKeyPressed()
 
         # menu bar
         menu = self.menuBar()
@@ -50,7 +50,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # get save file dir from QFileDialog
         dir = QtWidgets.QFileDialog.getExistingDirectory(self, self.tr("目标目录"))
         if dir:
-            pbar = QtWidgets.QProgressDialog(self.tr("&保存中"), self.tr("取消"), 0, len(self.fileBrowser.imageChooseList.dataList), self)
+            pbar = QtWidgets.QProgressDialog(self.tr("保存中"), self.tr("取消"), 0, len(self.fileBrowser.imageChooseList.dataList), self)
             pbar.setWindowModality(Qt.WindowModal)
             for i,file_path in enumerate(self.fileBrowser.imageChooseList.dataList,start=1):
                 if pbar.wasCanceled():
@@ -87,7 +87,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.fileBrowser.imageFileList.display.currentItem().text()
         )
 
-    def handleImageChooseBrowserKeyPressed(self):
+    def initHandleImageChooseBrowserKeyPressed(self):
         # handle image file list key pressed
         imageFileListOriginEvent = self.fileBrowser.imageFileList.display.keyPressEvent
 
