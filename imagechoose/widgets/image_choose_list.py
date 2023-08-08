@@ -191,17 +191,20 @@ class ImageChooseBrowser(QtWidgets.QDockWidget):
             self.imageFileList.replace(self.files)
 
     def onSearchReturnKeyPressed(self):
-        if (search_text := self.imageSearch.text()) != "":
+        search_text = self.imageSearch.text()
+        if search_text != "":
             results = set([f for f in self.files if search_text in f])
             self.imageFileList.replace(results)
             
 
     def onImageFileListDoubleClicked(self):
-        if target := self.imageFileList.display.currentItem():
+        target = self.imageFileList.display.currentItem()
+        if target is not None:
             self.imageChooseList.addItems(target.text())
 
     def onImageChooseListDoubleClicked(self):
-        if target := self.imageChooseList.display.currentItem():
+        target = self.imageChooseList.display.currentItem()
+        if target is not None:
             self.imageChooseList.removeItems(target.text())
 
     def onImageFileListRightClicked(self):

@@ -72,12 +72,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def onImageFileListClicked(self):
         self.fileBrowser.imageChooseList.display.clearSelection()
-        if currentItem := self.fileBrowser.imageFileList.display.currentItem():
+        currentItem = self.fileBrowser.imageFileList.display.currentItem()
+        if currentItem is not None:
             self.imageCanvas.updateImage(currentItem.text())
 
     def onImageChooseListClicked(self):
         self.fileBrowser.imageFileList.display.clearSelection()
-        if currentItem := self.fileBrowser.imageChooseList.display.currentItem():
+        currentItem = self.fileBrowser.imageChooseList.display.currentItem()
+        if currentItem is not None:
             self.imageCanvas.updateImage(currentItem.text())
 
     def onImageChooseBrowserClicked(self):
@@ -115,9 +117,9 @@ class MainWindow(QtWidgets.QMainWindow):
         def handleImageChooseListKeyPressed(event):
             key = event.key()
             if key == Qt.Key.Key_Delete or key == Qt.Key.Key_Backspace:
-                if (
-                    currentItems := self.fileBrowser.imageChooseList.display.selectedItems()
-                ):
+              
+                currentItems = self.fileBrowser.imageChooseList.display.selectedItems()
+                if currentItems:
                     currentRow = self.fileBrowser.imageChooseList.display.currentRow()
                     self.fileBrowser.imageChooseList.removeItems(
                         [item.text() for item in currentItems]
